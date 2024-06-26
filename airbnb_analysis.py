@@ -13,44 +13,37 @@ data = pd.read_csv("C:/Users/visha/Downloads/Airbnb_data.csv")
 data.to_sql("air", conn, if_exists='replace', index=False)
 
 # SQL queries
-roomtype_vs_count = pd.read_sql_query('''SELECT room_type, COUNT(*) FROM air GROUP BY room_type''', conn)
-roomtype_vs_price = pd.read_sql_query('''SELECT room_type, AVG(price) FROM air GROUP BY room_type ORDER BY AVG(price)''', conn)
-roomtype_vs_sumprice = pd.read_sql_query('''SELECT room_type, SUM(price) FROM air GROUP BY room_type''', conn)
-roomtype_vs_accommodate = pd.read_sql_query('''SELECT room_type, AVG(accommodates) FROM air GROUP BY room_type''', conn)
-roomtype_vs_bedroom = pd.read_sql_query('''SELECT room_type, AVG(bedrooms) FROM air GROUP BY room_type''', conn)
-roomtype_vs_beds = pd.read_sql_query('''SELECT room_type, AVG(beds) FROM air GROUP BY room_type''', conn)
-protype_vs_count = pd.read_sql_query('''SELECT property_type, COUNT(*) FROM air GROUP BY property_type ORDER BY COUNT(*) DESC''', conn)
-protype_vs_pricesavg = pd.read_sql_query('''SELECT property_type, AVG(price) FROM air GROUP BY property_type ORDER BY AVG(price) DESC''', conn)
-protype_vs_pricesum = pd.read_sql_query('''SELECT property_type, SUM(price) FROM air GROUP BY property_type ORDER BY SUM(price) DESC''', conn)
-cancle_vs_price = pd.read_sql_query('''SELECT cancellation_policy, AVG(price) FROM air GROUP BY cancellation_policy''',conn)
-cancle_vs_count = pd.read_sql_query('''SELECT cancellation_policy, COUNT(*) FROM air GROUP BY cancellation_policy''',conn)
-cancle_vs_epeople = pd.read_sql_query('''SELECT cancellation_policy, AVG(extra_people) FROM air GROUP BY cancellation_policy''', conn)
-cancle_vs_pricesum = pd.read_sql_query('''SELECT cancellation_policy, SUM(price) FROM air GROUP BY cancellation_policy''', conn)
+roomtype_vs_count=pd.read_sql_query(''' SELECT room_type,COUNT(*) from air GROUP BY room_type ''',conn)
+roomtype_vs_price=pd.read_sql_query('''SELECT room_type,avg(price) from air GROUP BY room_type ORDER BY avg(price)''',conn)
+roomtype_vs_sumprice=pd.read_sql_query('''SELECT room_type,sum(price) from air GROUP BY room_type''',conn)
+roomtype_vs_accommodate=pd.read_sql_query('''SELECT room_type,avg(accommodates) from air GROUP BY room_type''',conn)
+roomtype_vs_bedroom=pd.read_sql_query('''SELECT room_type,avg(bedrooms) from air GROUP BY room_type''',conn)
+roomtype_vs_beds=pd.read_sql_query('''SELECT room_type,avg(beds) from air GROUP BY room_type''',conn)
+protype_vs_count=pd.read_sql_query('''SELECT property_type,COUNT(*) from air GROUP BY property_type ORDER BY COUNT(*) desc''',conn)
+protype_vs_pricesavg=pd.read_sql_query('''SELECT property_type,avg(price) from air GROUP BY property_type ORDER BY avg(price) desc''',conn)
+protype_vs_pricesum=pd.read_sql_query('''SELECT property_type,sum(price) from air GROUP BY property_type ORDER BY sum(price) desc''',conn)
+cancle_vs_price=pd.read_sql_query('''SELECT cancellation_policy,avg(price) from air GROUP BY cancellation_policy''',conn)
+cancle_vs_count=pd.read_sql_query('''SELECT cancellation_policy,COUNT(*) from air GROUP BY cancellation_policy''',conn)
+cancle_vs_epeople=pd.read_sql_query('''SELECT cancellation_policy,avg(extra_people) from air GROUP BY cancellation_policy''',conn)
+cancle_vs_pricesum=pd.read_sql_query('''SELECT cancellation_policy,sum(price) from air GROUP BY cancellation_policy''',conn)
+customer= pd.merge(roomtype_vs_accommodate, roomtype_vs_bedroom, on='room_type')
+customers=pd.merge(customer,roomtype_vs_beds,on='room_type')
 
 # Merge data for visualization
 customer = pd.merge(roomtype_vs_accommodate, roomtype_vs_bedroom, on='room_type')
 customers = pd.merge(customer, roomtype_vs_beds, on='room_type')
 
 # Visualizations using Plotly Express
-roomtype_vs_count_fig = px.pie(roomtype_vs_count, names='room_type', values='COUNT(*)', title='Room Type Count')
-roomtype_vs_price_fig = px.bar(roomtype_vs_price, x='room_type', y='avg(price)', color='room_type',
-                               title='Room Type vs AVG. Price')
-roomtype_vs_sumprice_fig = px.pie(roomtype_vs_sumprice, names='room_type', values='sum(price)',
-                                  title='Room Type vs Revenue')
-protype_vs_count_fig = px.bar(protype_vs_count, x='property_type', y='COUNT(*)', color='property_type',
-                              title='Property Type Count')
-protype_vs_pricesavg_fig = px.bar(protype_vs_pricesavg, x='property_type', y='avg(price)', color='property_type',
-                                  title='Property Type vs AVG. Price')
-protype_vs_pricesum_fig = px.bar(protype_vs_pricesum, x='property_type', y='sum(price)', color='property_type',
-                                 title='Property Type vs Revenue')
-cancle_vs_price_fig = px.bar(cancle_vs_price, x='cancellation_policy', y='avg(price)', color='cancellation_policy',
-                             title='Cancellation Policy vs Price')
-cancle_vs_count_fig = px.bar(cancle_vs_count, x='cancellation_policy', y='COUNT(*)', color='cancellation_policy',
-                             title='Cancellation Policy Count')
-cancle_vs_epeople_fig = px.bar(cancle_vs_epeople, x='cancellation_policy', y='avg(extra_people)',
-                               color='cancellation_policy', title='Cancellation Policy vs Extra People')
-cancle_vs_pricesum_fig = px.pie(cancle_vs_pricesum, names='cancellation_policy', values='sum(price)',
-                                title='Cancellation Policy vs Revenue')
+roomtype_vs_count_fig=px.pie(roomtype_vs_count,names='room_type',values='COUNT(*)',title='Room type Count')
+roomtype_vs_price_fig=px.bar(roomtype_vs_price,x='room_type',y='avg(price)',color='room_type',title='Room type vs AVG.price')
+roomtype_vs_sumprice_fig=px.pie(roomtype_vs_sumprice,names='room_type',values='sum(price)',title='Room type vs Revenue')
+protype_vs_count_fig=px.bar(protype_vs_count,x='property_type',y='COUNT(*)',color='property_type',title='Property type Count')
+protype_vs_pricesavg_fig=px.bar(protype_vs_pricesavg,x='property_type',y='avg(price)',color='property_type',title='Property type vs AVG.price')
+protype_vs_pricesum_fig=px.bar(protype_vs_pricesum,x='property_type',y='sum(price)',color='property_type',title='Property type vs Revenue')
+cancle_vs_price_fig=px.bar(cancle_vs_price,x='cancellation_policy',y='avg(price)',color='cancellation_policy',title='cancellation policy vs Price')
+cancle_vs_count_fig=px.bar(cancle_vs_count,x='cancellation_policy',y='COUNT(*)',color='cancellation_policy',title='cancellation policy Count')
+cancle_vs_epeople_fig=px.bar(cancle_vs_epeople,x='cancellation_policy',y='avg(extra_people)',color='cancellation_policy',title='cancellation policy vs extra people')
+cancle_vs_pricesum_fig=px.pie(cancle_vs_pricesum,names='cancellation_policy',values='sum(price)',title='cancellation policy vs Revenue')
 
 # Plots for Room Type and Customers
 df_entire_home = customers[customers['room_type'] == 'Entire home/apt']
