@@ -35,7 +35,8 @@ This repository contains scripts and files for:
 
 1. airbnb_data_cleaning.py: Python script for cleaning and preparing the Airbnb dataset.
 2. airbnb_analysis.py: Python script for connecting to SQLite, performing SQL queries, and generating Plotly Express visualizations.
-3. 
+3. airbnb_project_report.pbit:  Power BI template file (.pbit) designed for generating comprehensive project reports based on Airbnb data analysis.
+4. airbnb_project_report.pdf: This PDF document serves as a detailed report summarizing findings from the Airbnb data analysis project.
   
 ## Setup
 
