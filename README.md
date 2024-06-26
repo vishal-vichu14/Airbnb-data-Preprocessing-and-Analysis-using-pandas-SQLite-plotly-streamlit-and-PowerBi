@@ -33,18 +33,18 @@ This repository contains scripts and files for:
 
 ## Files
 
-  data_cleaning.py: Python script for cleaning and preparing the Airbnb dataset.
-  data_analysis.py: Python script for connecting to SQLite, performing SQL queries, and generating Plotly Express visualizations.
-  streamlit_app.py: Streamlit application script for interactive data exploration and visualization.
-  Airbnb_data.csv: Cleaned dataset saved after data preparation.
-
+1. data_cleaning.py: Python script for cleaning and preparing the Airbnb dataset.
+2. data_analysis.py: Python script for connecting to SQLite, performing SQL queries, and generating Plotly Express visualizations.
+3. streamlit_app.py: Streamlit application script for interactive data exploration and visualization.
+4. Airbnb_data.csv: Cleaned dataset saved after data preparation.
+  
 ## Setup
 
 ## Install dependencies:
 
-Ensure you have Python installed. Use pip (or pip3 for Python 3) to install the required libraries:
+  Ensure you have Python installed. Use pip (or pip3 for Python 3) to install the required libraries:
 
-pip install pandas plotly streamlit streamlit_option_menu
+  pip install pandas plotly streamlit streamlit_option_menu
 
 ## Run Streamlit application:
 
